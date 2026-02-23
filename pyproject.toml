@@ -1,0 +1,28 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "jax_mpp"
+version = "0.1.0"
+description = "JAX/Flax translation of the Multiple Physics Pretraining (MPP) AViT model"
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [{ name = "Leon Armbruster", email = "leonarmbruster@iisb.fraunhofer.de" }]
+license = { text = "MIT" }
+license-files = ["LICENSE"]
+
+dependencies = [
+    "flax>=0.10",
+    "jax>=0.5",
+    "jaxlib>=0.5",
+    "numpy>=1.26",
+    "einops>=0.8",
+]
+
+[project.optional-dependencies]
+convert = ["torch>=2.4"]
+gpu = ["jax[cuda12]"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["jax_mpp"]
