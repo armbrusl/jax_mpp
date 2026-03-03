@@ -7,7 +7,7 @@ name = "jax_mpp"
 version = "0.1.0"
 description = "JAX/Flax translation of the Multiple Physics Pretraining (MPP) AViT model"
 readme = "README.md"
-requires-python = ">=3.11"
+requires-python = ">=3.10"
 authors = [{ name = "Leon Armbruster", email = "leonarmbruster@iisb.fraunhofer.de" }]
 license = { text = "MIT" }
 license-files = ["LICENSE"]
