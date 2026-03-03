@@ -25,6 +25,14 @@ Quick start::
         x, labels, bcs, deterministic=True,
     )
     y = model.apply(params, x, labels, bcs, deterministic=True)
+
+.. note::
+    This package is designed to be used with jNO
+    (https://github.com/FhG-IISB/jNO).
+
+.. warning::
+    This is a research-level repository. It may contain bugs and is subject
+    to continuous change without notice.
 """
 
 from importlib.metadata import PackageNotFoundError, version

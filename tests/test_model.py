@@ -11,6 +11,7 @@ jax.config.update("jax_platform_name", "cpu")
 def tiny_model():
     """AViT-Ti with default config (smallest available variant)."""
     from jax_mpp.configs import avit_Ti
+
     return avit_Ti()
 
 
@@ -30,7 +31,9 @@ def tiny_params(tiny_model, tiny_inputs):
     rng = jax.random.PRNGKey(0)
     return tiny_model.init(
         {"params": rng, "drop_path": rng},
-        x, state_labels, bcs,
+        x,
+        state_labels,
+        bcs,
         deterministic=True,
     )
 
@@ -38,6 +41,7 @@ def tiny_params(tiny_model, tiny_inputs):
 def test_import():
     from jax_mpp import AViT
     from jax_mpp.configs import avit_Ti, avit_S, avit_B, avit_L, AVIT_CONFIGS
+
     assert "Ti" in AVIT_CONFIGS
 
 
@@ -57,7 +61,9 @@ def test_forward_shape(tiny_model, tiny_inputs, tiny_params):
     H, W = x.shape[3], x.shape[4]
     y = tiny_model.apply(
         {"params": tiny_params["params"]},
-        x, state_labels, bcs,
+        x,
+        state_labels,
+        bcs,
         deterministic=True,
     )
     # Returns last timestep: (B, C, H, W)
@@ -68,7 +74,9 @@ def test_forward_finite(tiny_model, tiny_inputs, tiny_params):
     x, state_labels, bcs = tiny_inputs
     y = tiny_model.apply(
         {"params": tiny_params["params"]},
-        x, state_labels, bcs,
+        x,
+        state_labels,
+        bcs,
         deterministic=True,
     )
     assert jnp.all(jnp.isfinite(y))
@@ -76,5 +84,6 @@ def test_forward_finite(tiny_model, tiny_inputs, tiny_params):
 
 def test_convenience_constructors():
     from jax_mpp.configs import avit_Ti, avit_S, avit_B, avit_L
+
     assert avit_Ti() is not None
     assert avit_S() is not None
